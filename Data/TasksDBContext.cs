@@ -17,6 +17,11 @@ namespace SistemadeTarefas.Data
             modelBuilder.ApplyConfiguration(new UserMap());
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<TaskModel>()
+            .HasOne(t => t.User)
+            .WithMany(u => u.Tasks)
+            .HasForeignKey(t => t.IdUser);
         }
     }
 }

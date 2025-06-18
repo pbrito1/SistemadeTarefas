@@ -55,5 +55,12 @@ namespace SistemadeTarefas.Controllers
             }
             return NotFound($"User with id {id} not found");
         }
+        [HttpPut]
+        public async Task<ActionResult<UserModel>> UpdateUserAsync([FromBody] UserModel userModel, int id)
+        {
+            userModel.Id = id;
+            UserModel updatedUser = await _userRepo.UpdateUserAsync(userModel, id);
+            return Ok(updatedUser);
+        }
     }
 }
