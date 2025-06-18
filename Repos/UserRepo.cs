@@ -21,7 +21,7 @@ namespace SistemadeTarefas.Repos
         {
             return await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
         }
-        public async Task<UserModel?> SearchUserByName(string name)
+        public async Task<UserModel?> SearchUserByNameAsync(string name)
         {
             return await _dbContext.Users.FirstOrDefaultAsync(x => x.Name == name);
         }
@@ -31,8 +31,8 @@ namespace SistemadeTarefas.Repos
         }
         public async Task<UserModel> CreateUserAsync(UserModel user)
         {
-            _dbContext.Users.Add(user);
-            _dbContext.SaveChanges();
+            await _dbContext.Users.AddAsync(user);
+            await _dbContext.SaveChangesAsync();
 
             return user;
         }

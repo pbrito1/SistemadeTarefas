@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SistemadeTarefas.Data.Map;
+using SistemadeTarefas.Models;
 
 namespace SistemadeTarefas.Data
 {
@@ -11,8 +13,10 @@ namespace SistemadeTarefas.Data
         public DbSet<Models.TaskModel> Tasks { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Models.TaskModel>().ToTable("Tasks");
-            modelBuilder.Entity<Models.UserModel>().ToTable("Users");
+            modelBuilder.ApplyConfiguration(new TaskMap());
+            modelBuilder.ApplyConfiguration(new UserMap());
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
